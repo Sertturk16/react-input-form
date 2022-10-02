@@ -52,7 +52,14 @@ const formTemplate: InputField[] = [
 
 ### Example Component
 
-`InputForm` component also accepts `title` prop to show at the top of input form and `setData` function to manipulate wrapper functions state. 
+`InputForm` component also accepts `title` prop to show at the top of input form and `setData` function to manipulate wrapper functions state.
+```js
+const [data, setData] = useState({
+  name: '',
+  surname: '',
+  address: ''
+})
+```
 ```js
 <InputForm formTemplate={formTemplate} title="User Form" setData={setData}/>
 ```
