@@ -33,7 +33,7 @@ const Submitted = ({ title, data, setData }: Props): ReactElement => {
         {
           entries.map(([key, value]) => (
             <div key={key} className="flex">
-              <span className='px-3 py-1.5 min-w-fit w-[50px] font-semibold text-grey-700 capitalize'>{key}: </span>
+              <span className='px-3 py-1.5 min-w-fit w-[100px] font-semibold text-grey-700 capitalize'>{key}: </span>
               <span className='px-3 py-1.5'>{value}</span>
             </div>
           ))
