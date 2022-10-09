@@ -1,7 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  value: {
+  user: {
     name: '',
     surname: '',
     address: ''
@@ -12,7 +12,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     submitForm: (state, action) => {
-      state.value = action.payload
+      state.user = action.payload
     },
     resetForm: (state) => {
       state = initialState

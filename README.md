@@ -22,40 +22,57 @@ Generic Input Form component which can be created with `form template`.
 
 #### Example form template:
 ```ts
-const formTemplate: InputField[] = [
-  {
-    id: 'name',
-    label: 'Name',
-    placeholder: 'Enter Name',
-    type: 'textfield'
-  },
-  {
-    id: 'surname',
-    label: 'Surname',
-    placeholder: 'Enter Surname',
-    type: 'textfield'
+  const formTemplate: InputField[] = [
+    {
+      id: 'name',
+      label: 'Name',
+      placeholder: 'Enter Name',
+      type: 'textfield',
+      rules: [
+        {
+          required: true,
+          message: 'This field is required!'
+        },
+        {
+          regex: /^[A-ZİĞÜŞÖÇ]/,
+          message: 'This field must start with a capital letter!'
+        }
+      ]
     },
     {
-    id: 'address',
-    label: 'Address',
-    placeholder: 'Enter Address',
-    type: 'textarea'
-  }
-]
+      id: 'surname',
+      label: 'Surname',
+      placeholder: 'Enter Surname',
+      type: 'textfield',
+      rules: [
+        {
+          required: true,
+          message: 'This field is required!'
+        },
+        {
+          regex: /^[A-ZİĞÜŞÖÇ]/,
+          message: 'This field must start with a capital letter!'
+        }
+      ]
+    },
+    {
+      id: 'address',
+      label: 'Address',
+      placeholder: 'Enter Address',
+      type: 'textarea',
+      rules: [
+        {
+          required: true,
+          message: 'This field is required!'
+        }
+      ]
+    }
+  ]
 ```
 
 ### Example Component
-
-`InputForm` component also accepts `title` prop to show at the top of input form and `setData` function to manipulate wrapper functions state.
 ```js
-const [data, setData] = useState({
-  name: '',
-  surname: '',
-  address: ''
-})
-```
-```js
-<InputForm formTemplate={formTemplate} title="User Form" setData={setData}/>
+<InputForm formTemplate={formTemplate} title="User Form"/>
 ```
 
 

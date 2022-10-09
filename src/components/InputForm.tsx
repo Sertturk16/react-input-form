@@ -1,6 +1,4 @@
 import React, { ReactElement } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import {
   Formik,
   Field,
@@ -8,33 +6,23 @@ import {
   FormikProps
 } from 'formik'
 
-import { submitForm } from '../store'
 import { rules } from '../lib/rules'
 import TextField from './TextField'
 import TextArea from './TextArea'
 import Button from './Button'
-
-import { FormValues } from '../model'
+import { InputField } from '../lib/model'
 
 interface Props {
   title: string
+  formTemplate: InputField[]
+  handleSubmit: any
 }
 
-const InputForm = ({ title }: Props): ReactElement => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  const initialValues: any = {
-    name: '',
-    surname: '',
-    address: ''
-  }
-
-  const handleSubmit = (form: FormValues): void => {
-    dispatch(submitForm(form))
-    navigate('/form-submitted')
-  }
-
+const InputForm = ({ title, formTemplate, handleSubmit }: Props): ReactElement => {
+  const initialValues: any = {}
+  formTemplate.forEach(input => {
+    initialValues[input.id] = ''
+  })
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white">
       <h1 className='font-semibold text-2xl mb-6 ml-2'>{title}</h1>
@@ -44,44 +32,22 @@ const InputForm = ({ title }: Props): ReactElement => {
       >
         { (formik: FormikProps<any>) => (
           <Form>
-            <Field key={'name'}
-              {...formik.getFieldProps('name')}
-              component={TextField}
-              name={'name'}
-              id={'name'}
-              label={'Name'}
-              validate={(e: string) => rules(e, [
-                { required: true, message: 'This field is required!' },
-                { regex: /^[A-ZİĞÜŞÖÇ]/, message: 'This field must start with capital letter!' }
-              ])}
-              placeholder={'Enter Name'}
-              error={formik.touched.name ? formik.errors.name : ''}
-            />
-            <Field key={'surname'}
-              {...formik.getFieldProps('surname')}
-              component={TextField}
-              name={'surname'}
-              id={'surname'}
-              label={'Surname'}
-              validate={(e: string) => rules(e, [
-                { required: true, message: 'This field is required!' },
-                { regex: /^[A-ZİĞÜŞÖÇ]/, message: 'This field must start with capital letter!' }
-              ])}
-              placeholder={'Enter Surname'}
-              error={formik.touched.surname ? formik.errors.surname : ''}
-            />
-            <Field key={'address'}
-              {...formik.getFieldProps('address')}
-              component={TextArea}
-              name={'address'}
-              id={'address'}
-              label={'Address'}
-              validate={(e: string) => rules(e, [
-                { required: true, message: 'This field is required!' }
-              ])}
-              placeholder={'Enter Address'}
-              error={formik.touched.address ? formik.errors.address : ''}
-            />
+            {
+              Object.entries(formTemplate).map(([key, value]) =>
+                <Field
+                  key={value.id}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  name={value.id}
+                  id={value.id}
+                  label={value.label}
+                  validate={(e: string) => rules(e, value.rules)}
+                  placeholder={value.placeholder}
+                  error={formik.touched[value.id] ? formik.errors[value.id] : ''}
+                  component={value.type === 'textfield' ? TextField : value.type === 'textarea' ? TextArea : null}
+                />
+              )
+            }
           <Button buttonText='Submit'/>
           </Form>
         )}

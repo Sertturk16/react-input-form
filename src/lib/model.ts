@@ -4,7 +4,7 @@ export interface InputField {
   placeholder: string
   required?: boolean
   type?: string
-  rules?: Rule[]
+  rules: Rule[]
 }
 
 export interface Rule {
@@ -19,10 +19,4 @@ export interface FormValues {
   name: string
   surname: string
   address: string
-}
-
-export interface Errors {
-  name?: string
-  surname?: string
-  address?: string
 }

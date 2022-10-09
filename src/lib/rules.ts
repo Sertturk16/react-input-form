@@ -1,4 +1,4 @@
-import { Rule } from '../model'
+import { Rule } from './model'
 export const rules = (value: string, arr: Rule[]): any => {
   const required = arr.find(rule => rule.required === true)
   const regex = arr.find(rule => rule.regex)
