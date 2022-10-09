@@ -1,31 +1,30 @@
 import React, { ReactElement } from 'react'
-import { FormikProps } from 'formik'
 
-import { InputField } from '../model'
-import ErrorMsg from './ErrorMsg'
+import ErrorMessage from './ErrorMessage'
 
 interface Props {
-  input: InputField
-  formik: FormikProps<any>
+  id: string
+  label: string
+  placeholder: string
+  value: string
+  error?: string
+  onChange: (params: any) => any
 }
 
-const Textfield = ({ input, formik }: Props): ReactElement => {
+const Textfield = ({ id, label, placeholder, value, onChange, error }: Props): ReactElement => {
   return (
     <div className="form-group mb-6">
       <div className="flex">
-        <label className='px-3 py-1.5 min-w-fit w-[150px] text-grey-700' htmlFor={input.id}>{input.label} :</label>
+        <label className='px-3 py-1.5 min-w-fit w-[150px] text-grey-700' htmlFor={id}>{label} :</label>
         <input type="text" className="px-3 py-1.5 m-0 form-element form-control"
-          id={input.id}
-          name={input.id}
-          placeholder={input.placeholder}
-          value={formik.values[input.id]}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          id={id}
+          name={id}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
         />
       </div>
-      {
-        (formik.errors[input.id] && formik.touched[input.id]) && <ErrorMsg text={formik.errors[input.id]}></ErrorMsg>
-      }
+        {error && error !== '' && <ErrorMessage text={error}/>}
     </div>
   )
 }

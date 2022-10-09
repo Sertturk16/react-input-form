@@ -3,8 +3,16 @@ export interface InputField {
   label: string
   placeholder: string
   required?: boolean
-  capital?: boolean
   type?: string
+  rules?: Rule[]
+}
+
+export interface Rule {
+  required?: boolean
+  regex?: RegExp
+  min?: number
+  max?: number
+  message: string
 }
 
 export interface FormValues {

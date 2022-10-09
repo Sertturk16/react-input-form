@@ -27,24 +27,18 @@ const formTemplate: InputField[] = [
     id: 'name',
     label: 'Name',
     placeholder: 'Enter Name',
-    required: true,
-    capital: true,
     type: 'textfield'
   },
   {
     id: 'surname',
     label: 'Surname',
     placeholder: 'Enter Surname',
-    required: true,
-    capital: true,
     type: 'textfield'
     },
     {
     id: 'address',
     label: 'Address',
     placeholder: 'Enter Address',
-    required: true,
-    capital: false,
     type: 'textarea'
   }
 ]
