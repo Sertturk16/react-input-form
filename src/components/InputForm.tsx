@@ -17,7 +17,11 @@ interface Props {
   formTemplate: InputField[]
   handleSubmit: any
 }
-
+/**
+ * @prop title {string} title of input form
+ * @prop formTemplate {array} includes input informations
+ * @prop handleSubmit {function} triggers when form is valid after clicking submit button
+ */
 const InputForm = ({ title, formTemplate, handleSubmit }: Props): ReactElement => {
   const initialValues: any = {}
   formTemplate.forEach(input => {
